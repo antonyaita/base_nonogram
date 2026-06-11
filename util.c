@@ -9,6 +9,7 @@ void inicia_tela(Tela *t, int larg, int alt, char *nome) {
     /* inicializa dados sobre o mouse */
     t->_mouse.x = t->_mouse.y = t->_tecla = 0;
     t->_botao = false;
+    t->_botao_mouse = 0;
 
     /* inicializa o allegro */
     if (!al_init()) {
@@ -118,13 +119,13 @@ void processa_eventos(Tela *t) {
                 break;
             }
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN: {
-                if (event.mouse.button == 1)
-                    t->_botao = true;
+                t->_botao = true;
+                t->_botao_mouse = event.mouse.button;
                 break;
             }
             case ALLEGRO_EVENT_MOUSE_BUTTON_UP: {
-                if (event.mouse.button == 1)
-                    t->_botao = false;
+                t->_botao = false;
+                t->_botao_mouse = 0;
                 break;
             }
             case ALLEGRO_EVENT_DISPLAY_CLOSE: {
@@ -223,6 +224,5 @@ Tamanho tamanho_texto(Tela *t, char *s) {
 
 // retorna se o ponto estiver dentro do retangulo
 bool ret_contains_pt(Retangulo r, Ponto p) {
-    // return (r.pos.x < p.x && r.pos.x + r.tam.larg > p.x && r.pos.y < p.y && r.pos.y + r.tam.alt > p.y);
-    return (p.x <= r.pos.x + r.tam.larg) && (p.y <= r.pos.y + r.tam.alt);
+    return (r.pos.x < p.x && r.pos.x + r.tam.larg > p.x && r.pos.y < p.y && r.pos.y + r.tam.alt > p.y);
 }

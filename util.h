@@ -53,6 +53,7 @@ typedef struct tela {
     Tamanho tam;                // tamanho da janela
     Ponto _mouse;               // onde esta o mouse
     bool _botao;                // estado do botao do mouse
+    int _botao_mouse;
     int _tecla;                 // ultima tecla apertada
 } Tela;
 
